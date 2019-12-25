@@ -10,6 +10,13 @@ from itertools import islice
 import json
 import time
 
+"""
+账号：username
+密码：password
+chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])设置浏览器设置为开发者模式
+利用mitmproxy抓包访问网站的请求，修改js，将window.navigator.webdriver修改为false
+"""
+
 
 class TaobaoSpider:
 
@@ -17,6 +24,7 @@ class TaobaoSpider:
 
 		chrome_options = webdriver.ChromeOptions()
 		chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+		chrome_options.add_argument('--proxy-server=http://127.0.0.1:8080')
 		self.web_driver = webdriver.Chrome(options = chrome_options)
 		self.web_driver_wait = WebDriverWait(self.web_driver, 15)
 		self.client = MongoClient('mongodb://localhost:27017/')
